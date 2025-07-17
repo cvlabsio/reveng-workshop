@@ -1,0 +1,229 @@
+# Blackfyre Configuration for AKRODLABS Training
+# ML-Powered Binary Analysis Platform
+
+# Analysis Configuration
+analysis:
+  # Enable different analysis modules
+  static_analysis: true
+  dynamic_analysis: false  # Not implemented in basic version
+  ml_classification: true
+  feature_extraction: true
+  similarity_analysis: true
+  
+  # Analysis depth settings
+  max_functions_analyzed: 100
+  max_strings_analyzed: 500
+  include_decompiled_code: true
+  include_raw_binary: false
+  
+  # ML Model Configuration
+  ml_models:
+    binary_classifier: "random_forest"
+    similarity_model: "contrastive_learning"
+    feature_extractor: "statistical"
+  
+  # Feature extraction settings
+  features:
+    include_entropy: true
+    include_n_grams: true
+    include_opcode_frequency: true
+    include_string_features: true
+    include_import_features: true
+    include_structural_features: true
+
+# Binary Context Container (BCC) Settings
+bcc_config:
+  # Data to include in BCC files
+  include_functions: true
+  include_basic_blocks: true
+  include_instructions: true
+  include_strings: true
+  include_imports: true
+  include_exports: true
+  include_metadata: true
+  
+  # Compression and storage
+  compress_data: true
+  max_file_size_mb: 100
+  
+  # Privacy settings
+  anonymize_paths: false
+  include_timestamps: true
+
+# Disassembler Integration
+disassemblers:
+  ghidra:
+    enabled: true
+    headless_mode: true
+    script_timeout_seconds: 300
+    output_format: "json"
+    
+  ida_pro:
+    enabled: false  # Requires manual setup
+    python_path: ""
+    ida_path: ""
+    
+  binary_ninja:
+    enabled: false  # Future implementation
+    api_key: ""
+
+# Machine Learning Configuration
+ml_config:
+  # Training data paths
+  training_data:
+    malware_samples: "./training_data/malware/"
+    benign_samples: "./training_data/benign/"
+    
+  # Model parameters
+  models:
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      random_state: 42
+      
+    svm:
+      kernel: "rbf"
+      C: 1.0
+      gamma: "scale"
+      
+    neural_network:
+      hidden_layers: [128, 64, 32]
+      activation: "relu"
+      epochs: 50
+      batch_size: 32
+  
+  # Feature processing
+  feature_processing:
+    normalize_features: true
+    remove_outliers: true
+    feature_selection: true
+    max_features: 1000
+
+# Output Configuration
+output:
+  # Analysis results
+  save_intermediate_results: true
+  output_directory: "./blackfyre_analysis_results"
+  results_format: "json"  # json, csv, xml
+  
+  # Logging
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_file: "./logs/blackfyre.log"
+  
+  # Reports
+  generate_summary_report: true
+  include_visualizations: false  # Requires matplotlib
+  
+  # Export formats
+  export_formats:
+    - "json"
+    - "csv"
+    # - "yara"  # Future implementation
+
+# Performance Settings
+performance:
+  # Parallel processing
+  enable_multiprocessing: true
+  max_workers: 4
+  
+  # Memory management
+  max_memory_usage_gb: 8
+  cache_size_mb: 512
+  
+  # Timeout settings
+  analysis_timeout_seconds: 600
+  function_timeout_seconds: 30
+
+# Security Settings
+security:
+  # Malware handling
+  run_in_sandbox: true
+  network_isolation: true
+  
+  # File system protection
+  restrict_file_access: true
+  allowed_directories:
+    - "./analysis_samples"
+    - "./blackfyre_analysis_results"
+    - "./training_data"
+  
+  # API security
+  require_api_key: false
+  rate_limiting: false
+
+# Integration Settings
+integration:
+  # External tools
+  volatility:
+    enabled: false
+    profile_path: ""
+    
+  yara:
+    enabled: true
+    rules_directory: "./yara_rules"
+    
+  capa:
+    enabled: false
+    rules_path: ""
+  
+  # Databases
+  hash_database:
+    enabled: false
+    database_path: ""
+    
+  threat_intelligence:
+    enabled: false
+    api_keys: {}
+
+# Training-Specific Settings
+training:
+  # Educational mode
+  educational_mode: true
+  detailed_explanations: true
+  step_by_step_analysis: true
+  
+  # Sample data
+  use_demo_samples: true
+  demo_samples_path: "./demo_samples"
+  
+  # Progress tracking
+  track_student_progress: false
+  generate_certificates: false
+  
+  # Exercises
+  include_hands_on_exercises: true
+  exercise_difficulty_levels:
+    - "beginner"
+    - "intermediate" 
+    - "advanced"
+
+# Experimental Features
+experimental:
+  # Advanced ML techniques
+  enable_deep_learning: false
+  enable_graph_neural_networks: false
+  
+  # AI integration
+  llm_integration: false
+  llm_provider: "openai"
+  llm_model: "gpt-4o-mini"
+  
+  # Research features
+  enable_research_mode: false
+  collect_anonymized_metrics: false
+
+# Version and Compatibility
+version: "1.0.0"
+compatibility:
+  python_version: ">=3.8"
+  required_packages:
+    - "scikit-learn>=1.0.0"
+    - "numpy>=1.20.0"
+    - "pandas>=1.3.0"
+    - "pyvex>=9.2.0"
+  
+  optional_packages:
+    - "matplotlib>=3.5.0"  # For visualizations
+    - "seaborn>=0.11.0"    # For advanced plots
+    - "tensorflow>=2.8.0"  # For deep learning
+    - "torch>=1.12.0"      # Alternative ML backend
